@@ -1,4 +1,4 @@
-('C:\\Users\\USER\\PycharmProjects\\EmailMonitor\\build\\Email_Monitor\\PYZ-00.pyz',
+('C:\\Users\\USER\\PycharmProjects\\EmailMonitor\\build\\email_monitor\\PYZ-00.pyz',
  [('PIL',
    'C:\\Users\\USER\\PycharmProjects\\EmailMonitor\\venv\\Lib\\site-packages\\PIL\\__init__.py',
    'PYMODULE'),

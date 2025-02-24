@@ -17,7 +17,7 @@ class EmailMonitor:
     def __init__(self):
         self.service = None
         self.credential_path = "token.pickle"
-        self.credentials_json = "credentials.json"  # Update this if your file has a different name
+        self.credentials_json = "credentials.json"  # Default name, will be adjusted dynamically
 
         try:
             # Setup GUI
@@ -58,6 +58,16 @@ class EmailMonitor:
     def authenticate_gmail(self):
         try:
             creds = None
+            # Determine the path for credentials.json
+            if getattr(sys, 'frozen', False):
+                base_path = sys._MEIPASS
+            else:
+                base_path = os.path.dirname(os.path.abspath(__file__))
+
+            credentials_path = os.path.join(base_path, self.credentials_json)
+            if not os.path.exists(credentials_path):
+                raise FileNotFoundError(f"Credentials file not found at {credentials_path}")
+
             if os.path.exists(self.credential_path):
                 with open(self.credential_path, 'rb') as token:
                     creds = pickle.load(token)
@@ -66,7 +76,7 @@ class EmailMonitor:
                 if creds and creds.expired and creds.refresh_token:
                     creds.refresh(Request())
                 else:
-                    flow = InstalledAppFlow.from_client_secrets_file(self.credentials_json, SCOPES)
+                    flow = InstalledAppFlow.from_client_secrets_file(credentials_path, SCOPES)
                     creds = flow.run_local_server(port=0)
 
                 with open(self.credential_path, 'wb') as token:

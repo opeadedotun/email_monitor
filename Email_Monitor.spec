@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['Email_Monitor.py'],
+    ['email_monitor.py'],
     pathex=[],
     binaries=[],
-    datas=[('acenelog.png', '.')],
+    datas=[('credentials.json', '.'), ('acenelog.png', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='Email_Monitor',
+    name='email_monitor',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
